@@ -223,6 +223,8 @@ const App = () => {
         locations[locationIndex].residents.push(selectedCharacter.id)
         localStorage.setItem('locations', JSON.stringify(locations))
 
+        setIsDisabled(true)
+
         toast.success('Location assigned successfully')
     }
 
@@ -301,7 +303,7 @@ const App = () => {
                                                 >
                                                     {(item) => <AutocompleteItem key={item.id} value={item}>{item.name}</AutocompleteItem>}
                                                 </Autocomplete>
-                                                <Button size='sm' className='w-15 self-end animate-pulse' isDisabled={isDisabled} onPress={saveLocation}>Assign Location</Button>
+                                                <Button size='sm' className='w-15 self-end' isDisabled={isDisabled} color='secondary' onPress={saveLocation}>Assign Location</Button>
                                             </>
                                     }
                                 </div>
