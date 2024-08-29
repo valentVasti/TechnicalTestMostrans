@@ -8,9 +8,9 @@ const CharacterList = ({ openDetailSection, data, isLoading }) => {
     }
 
     return (
-        <Table aria-label="Example static collection table" selectionMode='single'>
+        <Table aria-label="Example static collection table" selectionMode='single' hideHeader>
             <TableHeader>
-                <TableColumn>NAME</TableColumn>
+                <TableColumn>CHARACTER</TableColumn>
             </TableHeader>
             <TableBody isLoading={isLoading} loadingContent={<Spinner label="Loading..." />}>
                 {

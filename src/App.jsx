@@ -6,7 +6,6 @@ import {
     AutocompleteItem,
     Button,
     Listbox,
-    ListboxSection,
     ListboxItem
 } from '@nextui-org/react'
 import { IoCloseOutline } from 'react-icons/io5'
@@ -29,14 +28,6 @@ query{
       type
       gender
       image
-    }
-  }
-  locations{
-    results{
-      id
-      name
-      type
-      dimension
     }
   }
 }
@@ -115,7 +106,6 @@ const App = () => {
             setSelectedMenu('Character By Locations')
         }
 
-        console.log(menu)
         gsap.to(menuSection.current, {
             left: '-100%',
             duration: 0.5,
@@ -237,7 +227,7 @@ const App = () => {
     return (
         <>
             <Toaster />
-            <aside ref={menuSection} className="bg-white h-screen w-2/3 md:w-1/5 absolute -top-0 -left-full z-40 will-change-transform p-3">
+            <aside ref={menuSection} className="bg-white h-screen w-2/3 md:w-1/3 lg:w-1/5 absolute -top-0 -left-full z-40 will-change-transform p-3">
                 <div className='flex justify-end'>
                     <IoCloseOutline className='text-2xl rounded-full bg-gray-200 p-1' onClick={() => closeMenuSection('close')} />
                 </div>
@@ -256,7 +246,7 @@ const App = () => {
                         <CharacterByLocation openDetailSection={openDetailSection} data={JSON.parse(localStorage.getItem('locations'))} />
                 }
             </div>
-            <aside ref={detailSection} className="bg-white h-screen w-3/4 md:w-1/5 fixed top-0 -right-full z-30 py-2 px-4 will-change-transform flex flex-col gap-4">
+            <aside ref={detailSection} className="bg-white h-screen w-3/4 md:w-1/2 lg:w-1/5 fixed top-0 -right-full z-30 py-2 px-4 will-change-transform flex flex-col gap-4">
                 {detailType == 'character' ?
                     <>
                         <div className='flex w-full justify-between items-center'>
@@ -264,7 +254,7 @@ const App = () => {
                             <h1 className='font-semibold text-lg'>Character Detail</h1>
                         </div>
                         <div className='flex flex-col justify-center items-center'>
-                            <img src={selectedCharacter.image} className='size-36 rounded-full' />
+                            <img src={selectedCharacter.image} className='size-36 rounded-full' alt={selectedCharacter.name} />
                             <h1 className='text-xl font-bold'>{selectedCharacter.name}</h1>
                             <div className='flex items-baseline justify-center w-full gap-1 mt-2'>
                                 <div className={cn('size-3 rounded-full', selectedCharacter.status == 'Alive' ? 'bg-green-600' : selectedCharacter.status == 'Dead' ? 'bg-red-500' : 'bg-gray-400')}></div>
@@ -272,16 +262,16 @@ const App = () => {
                             </div>
                             <div className='w-full h-auto flex flex-col justify-start items-start gap-3 mt-7'>
                                 <div>
-                                    <h3 className='text-sm font-light tracking-wide'>Species:</h3>
-                                    <h1 className='text-xl font-extralight'>{selectedCharacter.species}</h1>
+                                    <h2 className='text-xs font-light tracking-wide'>Species:</h2>
+                                    <h3 className='text-xl font-extralight'>{selectedCharacter.species}</h3>
                                 </div>
                                 <div>
-                                    <h3 className='text-xs font-light tracking-wide'>Type:</h3>
-                                    <h1 className='text-xl font-extralight'>{selectedCharacter.type.length !== 0 ? selectedCharacter.type : '-'}</h1>
+                                    <h2 className='text-xs font-light tracking-wide'>Type:</h2>
+                                    <h3 className='text-xl font-extralight'>{selectedCharacter.type.length !== 0 ? selectedCharacter.type : '-'}</h3>
                                 </div>
                                 <div>
-                                    <h3 className='text-xs font-light tracking-wide'>Gender:</h3>
-                                    <h1 className='text-xl font-extralight'>{selectedCharacter.gender}</h1>
+                                    <h2 className='text-xs font-light tracking-wide'>Gender:</h2>
+                                    <h3 className='text-xl font-extralight'>{selectedCharacter.gender}</h3>
                                 </div>
                                 <div className={cn('flex flex-col', selectedCharacter.locations != null ? '' : 'gap-3')}>
                                     <h3 className='text-xs font-light tracking-wide'>Locations:</h3>
@@ -332,7 +322,7 @@ const App = () => {
 
                                             return (<ListboxItem key={character.id}>
                                                 <div className='flex gap-2 items-center'>
-                                                    <img src={character.image} className='size-10 sm:size-12 rounded-full' />
+                                                    <img src={character.image} className='size-10 sm:size-12 rounded-full' alt={character.name} />
                                                     <div>
                                                         <h1 className='text-md sm:text-lg font-semibold'>{character.name}</h1>
                                                         <div className='flex items-center gap-1'>
